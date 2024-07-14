@@ -49,11 +49,6 @@ async function getPictureByValue(evt) {
   try {
     const { hits, totalHits } = await fetchParams(params);
     inputPictures(hits);
-    const itemsScroll = gallery.getBoundingClientRect().height * 2;
-    window.scrollBy({
-      top: itemsScroll,
-      behavior: 'smooth',
-    });
 
     params.maxPage = Math.ceil(totalHits / params.per_page);
     if (hits.length > 0 && hits.length !== totalHits) {
@@ -62,6 +57,12 @@ async function getPictureByValue(evt) {
     } else {
       hideLoadMore(btnLoad);
     }
+
+    const itemsScroll = gallery.getBoundingClientRect().height * 2;
+    window.scrollBy({
+      top: itemsScroll,
+      behavior: 'smooth',
+    });
   } catch (err) {
     errorParams(err);
   }
